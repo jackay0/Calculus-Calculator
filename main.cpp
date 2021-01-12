@@ -20,26 +20,31 @@ int main() {
   if(equation.find(x) != std::string::npos){
       
         
-      
+      //there is a bug where if the number ends in 0, its inherent value is 0 so it is treated like it is nonexstent.
        new_one = equation[equation.find(x)-1];
-       new_two = equation[equation.find(x)+2]-1;
+       for(int i = 2; equation[equation.find(x)-i]; i++)
+       {
+        new_one=new_one+equation[equation.find(x)-i];
+       }
+        
+      new_two = equation[equation.find(x)+2]-1;
 
       std::stringstream num(new_two);
       std::stringstream num_two(new_one);
-      int t;
-      int u;
+      int expo;
+      int multiplier;
 
-      int v;
+      int coef;
 
-      num >> t;
-      num_two >> u;
+      num >> expo;
+      num_two >> multiplier;
 
-      v = (t+1)*(u);
+      coef = (expo+1)*(multiplier);
       
       
-      std::cout <<  v;
+      std::cout <<  coef;
       std::cout << "x^";
-      std::cout <<  t;
+      std::cout <<  expo;
 
   }
   else{
