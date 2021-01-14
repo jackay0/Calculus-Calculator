@@ -25,10 +25,20 @@ int count_digits(int x)
   return length;
 }
 
-std::string get_operator()
+std::string get_operator(std::string s)
 {
-
-  return "fornow";
+  for (int i = 0; i < s.size(); i++)
+  {
+    if (s[i] == '+')
+      {
+        return " + ";
+      }
+    if (s[i] == '-')
+      {
+        return " - ";
+      }
+  }
+  return " ";
 }
 
 
@@ -87,7 +97,7 @@ for(int i = count_operators(equation)+2; i !=0; i--)
       std::cout <<  coef;
       std::cout << "x^";
       std::cout <<  expo;
-      std::cout << " + ";
+      std::cout << get_operator(equation);
       
       
 
@@ -95,7 +105,7 @@ for(int i = count_operators(equation)+2; i !=0; i--)
   else
   {
 
-    std::cout << "Doesn't contain x, either change the variable letter or it is a whole number...";
+    std::cout << "...";
     }
  
  
