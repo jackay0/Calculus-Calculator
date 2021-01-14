@@ -1,40 +1,82 @@
 #include <iostream>
 #include <sstream> 
+#include <algorithm>
+#include <vector>
+#include <string>
+
+int count_operators(std::string s) 
+{
+  int count = 0;
+
+  for (int i = 0; i < s.size(); i++)
+    if (s[i] == '+' ||s[i] == '-') count++;
+
+  return count;
+}
+
+int count_digits(int x) 
+{
+  int length = 1;
+
+  while ( x /= 10 )
+  {
+    length++;
+  }
+  return length;
+}
+
+std::string get_operator()
+{
+
+  return "fornow";
+}
 
 
 int main() {
+  //OPERATORS
+  std::string addition = "+";
+  std::string subtraction = "-";
+  std::string multiplication = "/";
+  std::string division = "*";
+  std::string right_paranthesis = "(";
+  std::string left_paranthesis = ")";
  
- 
- 
+ //DERIVATIVE STUFF
   std::string equation;
   std::string new_one;
   std::string new_two;
-  std::string new_temp;
   std::string x = "x";
-  std::string answer;
-
-
+  
   std::cout << "f(x)=?\n";
   std::cin >> equation;
 
-  if(equation.find(x) != std::string::npos){
+
+
+for(int i = count_operators(equation)+2; i !=0; i--)
+{
+      int expo;
+      int multiplier;
+      int coef;
+
+  if(equation.find(x) != std::string::npos)
+  {
       
         
       //there is a bug where if the number ends in 0, its inherent value is 0 so it is treated like it is nonexstent.
        new_one = equation[equation.find(x)-1];
        for(int i = 2; equation[equation.find(x)-i]; i++)
        {
-        new_one=new_one+equation[equation.find(x)-i];
+        new_one=equation[equation.find(x)-i]+new_one;
        }
-        
+       
+       
+      
+      
       new_two = equation[equation.find(x)+2]-1;
-
+      
       std::stringstream num(new_two);
       std::stringstream num_two(new_one);
-      int expo;
-      int multiplier;
-
-      int coef;
+      
 
       num >> expo;
       num_two >> multiplier;
@@ -45,12 +87,26 @@ int main() {
       std::cout <<  coef;
       std::cout << "x^";
       std::cout <<  expo;
+      std::cout << " + ";
+      
+      
 
   }
-  else{
+  else
+  {
 
     std::cout << "Doesn't contain x, either change the variable letter or it is a whole number...";
-  }
-
+    }
+ 
+ 
+ 
+ 
+ 
+  //keeps loop going until there are no more operators
+ std::string temp = equation.substr(0,count_digits(coef)+count_digits(expo)+2);
   
+  equation = equation.erase(0 , temp.length());
+
+  //std::cout << "\n" + equation;
+}
 }
