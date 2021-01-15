@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "derivative.h"
-
+#include "antiderivative.h"
 int main() 
 {
  
@@ -23,7 +23,12 @@ int main()
   std::cin >> equation;
   derivative(equation);
   }
-
+   if(answer==2)
+  {
+  std::cout << "f(x)=?\n";
+  std::cin >> equation;
+  antiderivative(equation);
+  }
 
 
 
