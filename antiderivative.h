@@ -11,12 +11,48 @@ std::string x = "x";
 int coefficient;
 int exponent;
 
-int new_coefficient;
-int new_exponent;
+double new_coefficient;
+double new_exponent;
+int count_operators_anti(std::string s) 
+{
+  int count = 0;
 
+  for (int i = 0; i < s.size(); i++)
+    if (s[i] == '+' ||s[i] == '-') count++;
+
+  return count;
+}
+
+int count_digits_anti(int x) 
+{
+  int length = 1;
+
+  while ( x /= 10 )
+  {
+    length++;
+  }
+  return length;
+}
+
+std::string get_operator_anti(std::string s)
+{
+  for (int i = 0; i < s.size(); i++)
+  {
+    if (s[i] == '+')
+      {
+        return " + ";
+      }
+    if (s[i] == '-')
+      {
+        return " - ";
+      }
+  }
+  return " ";
+}
 void antiderivative(std::string equation)
 {
-
+for(int i = count_operators_anti(equation)+1; i !=0; i--)
+{
   if(equation.find(x) == std::string::npos){
   std::cout << equation;
   std::cout << "x";
@@ -45,12 +81,17 @@ void antiderivative(std::string equation)
       num_two >> coefficient;
       
   }
+
   //FINAL MATH
   new_exponent = exponent+1;
   new_coefficient = coefficient/new_exponent;
   std::cout << new_coefficient;
   std::cout << "x^";
   std::cout << new_exponent;
+  std::cout << get_operator_anti(equation);
+  std::string temp = equation.substr(0,count_digits_anti(coefficient)+count_digits_anti(exponent)+2);
   
-  std::cout << " + C";
+   equation = equation.erase(0 , temp.length());
+}
+  std::cout << " C";
 }

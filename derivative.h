@@ -97,6 +97,7 @@ for(int i = count_operators(equation)+2; i !=0; i--)
       
 
   }
+  
   else
   {
 
