@@ -13,9 +13,34 @@ int count_operators_mvt(std::string s)
 
   return count;
 }
+int count_digits_mvt(int x) 
+{
+  int length = 1;
 
+  while ( x /= 10 )
+  {
+    length++;
+  }
+  return length;
+}
+std::string get_operator(std::string s)
+{
+  for (int i = 0; i < s.size(); i++)
+  {
+    if (s[i] == '+')
+      {
+        return " + ";
+      }
+    if (s[i] == '-')
+      {
+        return " - ";
+      }
+  }
+  return " ";
+}
 void mvt(std::string equationx1, std::string from, std::string to)
 {
+  
   //THE OTHER INSTANCE WHERE X2 IS PLUGGED IN
   std::string equationx2 = equationx1;
   
@@ -25,6 +50,8 @@ void mvt(std::string equationx1, std::string from, std::string to)
   double y_one;
   double y_two;
   
+  double num;
+
   //DENOMINATOR STUFF
   std::string x = "x";
   std::stringstream x1(from);
@@ -35,15 +62,19 @@ void mvt(std::string equationx1, std::string from, std::string to)
    
    
    double numerator;
-
+   size_t index;
+  for(int i = count_operators_mvt(equationx1)+1; i !=0; i--)
+  {
+   index = equationx1.find(x);
    if(equationx1.find(x) != std::string::npos)
     {
-      size_t index = equationx1.find(x);
+      
 
 
       equationx1.replace(index, 1, from);
 
       if(equationx1[index-1]){
+        double coef = equationx1[index-1];
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
@@ -56,12 +87,17 @@ void mvt(std::string equationx1, std::string from, std::string to)
         one >> temp_one_num;
         two >> temp_two_num;
 
-        y_one = temp_one_num*temp_two_num;
+        y_one = y_one + temp_one_num*temp_two_num;
+        
+  
+        
+        
       } 
 
       equationx2.replace(index, 1, to);
       
       if(equationx2[index-1]){
+        double coef = equationx2[index-1];
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
@@ -74,15 +110,18 @@ void mvt(std::string equationx1, std::string from, std::string to)
         one >> temp_one_num;
         two >> temp_two_num;
 
-        y_two = temp_one_num*temp_two_num;
+        y_two = y_two + temp_one_num*temp_two_num;
+        
+  
+        
+        
       } 
     
-      std::cout << (y_two-y_one)/(x_two-x_one);
+      
     }
+      
     
-
-
-
-
-
+  }
+  num = (y_two-y_one)/(x_two-x_one);
+  std::cout << num;
 }

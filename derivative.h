@@ -105,7 +105,7 @@ for(int i = count_operators(equation)+2; i !=0; i--)
     }
  
   //keeps loop going until there are no more operators
-  std::string temp = equation.substr(0,count_digits(coef)+count_digits(expo)+2);
+  std::string temp = equation.substr(0,count_digits(coef)+2);
   
    equation = equation.erase(0 , temp.length());
 
