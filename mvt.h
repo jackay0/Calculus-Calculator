@@ -23,7 +23,7 @@ int count_digits_mvt(int x)
   }
   return length;
 }
-std::string get_operator(std::string s)
+std::string get_operator_mvt(std::string s)
 {
   for (int i = 0; i < s.size(); i++)
   {
@@ -66,15 +66,21 @@ void mvt(std::string equationx1, std::string from, std::string to)
   for(int i = count_operators_mvt(equationx1)+1; i !=0; i--)
   {
    index = equationx1.find(x);
+   int multiplier;
    if(equationx1.find(x) != std::string::npos)
     {
-      
-
-
+      //finds if it is negative
+      if(equationx1[index-2]=='-')
+      {
+        multiplier = -1;
+      }
+      else{
+        multiplier = 1;
+      }
       equationx1.replace(index, 1, from);
 
       if(equationx1[index-1]){
-        double coef = equationx1[index-1];
+        double coef = equationx1[index-1]*multiplier;
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
@@ -86,18 +92,30 @@ void mvt(std::string equationx1, std::string from, std::string to)
         std::stringstream two(temp_two);
         one >> temp_one_num;
         two >> temp_two_num;
-
+        if(get_operator_mvt(equationx1)==" + ")
+        {
         y_one = y_one + temp_one_num*temp_two_num;
-        
-  
+        }
+        if(get_operator_mvt(equationx1)==" - ")
+        {
+        y_one = y_one - temp_one_num*temp_two_num;
+        }
         
         
       } 
 
       equationx2.replace(index, 1, to);
-      
+      int multiplier;
       if(equationx2[index-1]){
-        double coef = equationx2[index-1];
+        //finds if it is negative
+        if(equationx1[index-2]=='-')
+        {
+         multiplier = -1;
+         }
+        else{
+          multiplier = 1;
+        }
+        double coef = equationx2[index-1]*multiplier;
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
@@ -110,9 +128,14 @@ void mvt(std::string equationx1, std::string from, std::string to)
         one >> temp_one_num;
         two >> temp_two_num;
 
+        if(get_operator_mvt(equationx2)==" + ")
+        {
         y_two = y_two + temp_one_num*temp_two_num;
-        
-  
+        }
+        if(get_operator_mvt(equationx2)==" - ")
+        {
+        y_two = y_two - temp_one_num*temp_two_num;
+        }
         
         
       } 
