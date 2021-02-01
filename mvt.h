@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <math.h> 
 
 int count_operators_mvt(std::string s) 
 {
@@ -81,17 +82,32 @@ void mvt(std::string equationx1, std::string from, std::string to)
 
       if(equationx1[index-1]){
         double coef = equationx1[index-1]*multiplier;
+        double power;
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
         std::string temp_two;
-        
+        int i;
         temp_one = equationx1[index-1];
         temp_two = equationx1[index];
         std::stringstream one(temp_one);
         std::stringstream two(temp_two);
         one >> temp_one_num;
         two >> temp_two_num;
+
+        //finds the exponent
+        
+        if(equationx1[index+2]/1)
+        {
+          std::string power;
+          double exponent;
+          power = equationx1[index+2];
+          std::stringstream gr(power);
+          gr >> exponent;
+          
+          temp_one_num = pow(temp_one_num,exponent);
+        }
+        
         if(get_operator_mvt(equationx1)==" + ")
         {
         y_one = y_one + temp_one_num*temp_two_num;
@@ -100,10 +116,12 @@ void mvt(std::string equationx1, std::string from, std::string to)
         {
         y_one = y_one - temp_one_num*temp_two_num;
         }
-        
+        else{
+          y_one = temp_one_num*temp_two_num;
+        }
         
       } 
-
+      
       equationx2.replace(index, 1, to);
       int multiplier;
       if(equationx2[index-1]){
@@ -116,6 +134,7 @@ void mvt(std::string equationx1, std::string from, std::string to)
           multiplier = 1;
         }
         double coef = equationx2[index-1]*multiplier;
+        
         double temp_one_num; 
         std::string temp_one;
         double temp_two_num; 
@@ -127,7 +146,19 @@ void mvt(std::string equationx1, std::string from, std::string to)
         std::stringstream two(temp_two);
         one >> temp_one_num;
         two >> temp_two_num;
-
+        //finds exponent
+        if(equationx1[index+2])
+        {
+          std::string power;
+          double exponent;
+          power = equationx2[index+2];
+          std::stringstream gr(power);
+          gr >> exponent;
+          
+          temp_two_num = pow(temp_two_num,exponent);
+          
+        }
+        
         if(get_operator_mvt(equationx2)==" + ")
         {
         y_two = y_two + temp_one_num*temp_two_num;
@@ -136,7 +167,9 @@ void mvt(std::string equationx1, std::string from, std::string to)
         {
         y_two = y_two - temp_one_num*temp_two_num;
         }
-        
+        else{
+          y_two = temp_one_num*temp_two_num;
+        }
         
       } 
     
