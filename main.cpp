@@ -7,6 +7,8 @@
 #include "antiderivative.h"
 #include "mvt.h"
 #include "continuity.h"
+int answer;
+
 int main() 
 {
  
@@ -17,7 +19,7 @@ int main()
     double max;
   std::string from;
   std::string to;
-  int answer;
+  
   
   
   std::cout << "1. Derivatives 2. Antiderivatives 3. Mean Value Theorem 4. Continuity 5. Riemann Sum";
@@ -53,13 +55,18 @@ int main()
   {
     std::cout << "f(x)=?\n";
     std::cin >> equation;
-    std::cout << "f(x)=?\n";
+    std::cout << "g(x)=?\n";
     std::cin >> equation_two;
-    std::cout << "x > _?";
-    std::cin >> min;
-    std::cout << "x <= _?";
-    std::cin >> max;
-    //continuity();
+    std::cout << "x > _?  x <= _?";
+    std::cin >> x;
+    continuity(equation, equation_two,x);
   }
+}
+
+int get_answer()
+{
+return answer;
 
 }
+
+

@@ -5,6 +5,8 @@
 #include <string>
 #include <math.h> 
 
+
+double denominator; 
 int count_operators_mvt(std::string s) 
 {
   int count = 0;
@@ -38,7 +40,7 @@ std::string get_operator_mvt(std::string s)
       }
   }
   return " ";
-}
+} 
 void mvt(std::string equationx1, std::string from, std::string to)
 {
   
@@ -59,7 +61,7 @@ void mvt(std::string equationx1, std::string from, std::string to)
   std::stringstream x2(to);
    x1 >> x_one;
    x2 >> x_two;
-   double denominator = x_two - x_one;
+   denominator = x_two - x_one;
    
    
    double numerator;
@@ -97,15 +99,15 @@ void mvt(std::string equationx1, std::string from, std::string to)
 
         //finds the exponent
         
-        if(equationx1[index+2]/1)
+        if(equationx1[index+2])
         {
           std::string power;
           double exponent;
-          power = equationx1[index+2];
+          power = equationx2[index+2];
           std::stringstream gr(power);
           gr >> exponent;
           
-          temp_one_num = pow(temp_one_num,exponent);
+          temp_two_num = pow(temp_two_num,exponent);
         }
         
         if(get_operator_mvt(equationx1)==" + ")
@@ -147,12 +149,13 @@ void mvt(std::string equationx1, std::string from, std::string to)
         one >> temp_one_num;
         two >> temp_two_num;
         //finds exponent
-        if(equationx1[index+2])
+        if(equationx2[index+2])
         {
           std::string power;
           double exponent;
           power = equationx2[index+2];
           std::stringstream gr(power);
+          
           gr >> exponent;
           
           temp_two_num = pow(temp_two_num,exponent);
@@ -162,6 +165,7 @@ void mvt(std::string equationx1, std::string from, std::string to)
         if(get_operator_mvt(equationx2)==" + ")
         {
         y_two = y_two + temp_one_num*temp_two_num;
+        
         }
         if(get_operator_mvt(equationx2)==" - ")
         {
@@ -179,5 +183,7 @@ void mvt(std::string equationx1, std::string from, std::string to)
     
   }
   num = (y_two-y_one)/(x_two-x_one);
+  
   std::cout << num;
 }
+

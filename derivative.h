@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
+
+std::string new_equation;
+
 int count_operators(std::string s) 
 {
   int count = 0;
@@ -40,7 +43,7 @@ std::string get_operator(std::string s)
   }
   return " ";
 }
-void derivative(std::string equation) {
+std::string derivative(std::string equation) {
   //OPERATORS
   std::string addition = "+";
   std::string subtraction = "-";
@@ -88,11 +91,19 @@ for(int i = count_operators(equation)+2; i !=0; i--)
 
       coef = (expo+1)*(multiplier);
       
+      std::stringstream ss;
+      std::stringstream sa;
+      ss << coef;
+      sa << expo;
+      std::string co = ss.str();
+      std::string ex = sa.str(); 
+      std::string xpower = "x^";
+      std::string operatorr;
+      operatorr = get_operator(equation);
+      new_equation = new_equation + co+xpower+ex+operatorr;
       
-      std::cout <<  coef;
-      std::cout << "x^";
-      std::cout <<  expo;
-      std::cout << get_operator(equation);
+      
+      
       
       
 
@@ -101,14 +112,19 @@ for(int i = count_operators(equation)+2; i !=0; i--)
   else
   {
 
-    std::cout << "...";
-    }
+    std::cout << "";
+  }
  
   //keeps loop going until there are no more operators
-  std::string temp = equation.substr(0,count_digits(coef)+2);
+  std::string temp = equation.substr(0,count_digits(coef)+3);
   
    equation = equation.erase(0 , temp.length());
 
   //std::cout << "\n" + equation;
 }
+
+  std::cout << new_equation;
+  
+  
+  return new_equation;
 }
