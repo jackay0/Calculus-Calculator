@@ -5,11 +5,7 @@
 #include <string>
 #include <bits/stdc++.h>
 
-void parseSpace(std::string str)
-{
-    std::string word = "";
-    
-}
+
 
 
 
