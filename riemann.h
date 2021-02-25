@@ -14,6 +14,7 @@ double plug_riemann(std::string equation, std::string num)
    
    if(equation.find("x") != std::string::npos)
     {
+      
       //replaces the 'x' with the desired
       equation.replace(index, 1, num);
 
@@ -21,7 +22,6 @@ double plug_riemann(std::string equation, std::string num)
       std::string temp_one;
       double temp_two_num; 
       std::string temp_two;
-      int i;
       temp_one = equation[index-1];
       temp_two = equation[index];
       std::stringstream one(temp_one);
@@ -109,12 +109,16 @@ void riemann(std::string equation, int lower, int upper, int sub, int lrm)
   if(lrm==3){
     for(int i = lower; i < upper; i = i+length)
     {
-
-      std::string str = std::to_string((i+(i+1))/2);
+      
+      std::string str = std::to_string((i+(i+length))/2);
 
       std::string str_new = str.substr(0,1);
-    
+      
+
       totaly = totaly + plug_riemann(equation,str_new);
+
+      
+      
     }
  
  
